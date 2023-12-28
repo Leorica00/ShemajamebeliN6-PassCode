@@ -1,18 +1,32 @@
 package com.example.shemajamebelin6.presentation.passcode
 
+import android.util.Log.d
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.shemajamebelin6.BaseFragment
 import com.example.shemajamebelin6.R
 import com.example.shemajamebelin6.databinding.FragmentPassCodeBinding
+import kotlinx.coroutines.launch
 
 class PassCodeFragment : BaseFragment<FragmentPassCodeBinding>(FragmentPassCodeBinding::inflate) {
 
     private val inputPasscode = StringBuilder()
     private lateinit var passCodeDots: Array<View>
+    private val passCodeViewModel: PassCodeViewModel by viewModels()
 
     override fun setUpObservers() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                passCodeViewModel.inputStateFlow.collect {
+                    handlePassCodeResource(it)
+                }
+            }
+        }
     }
 
     override fun setUp() {
@@ -30,73 +44,66 @@ class PassCodeFragment : BaseFragment<FragmentPassCodeBinding>(FragmentPassCodeB
     private fun numbersClickListener() {
         with(binding) {
             btnNumber0.setOnClickListener {
-                addNumber("0")
+                passCodeViewModel.onEvent(PassCodeEvent.AddNumber("0"))
             }
             btnNumber1.setOnClickListener {
-                addNumber("1")
+                passCodeViewModel.onEvent(PassCodeEvent.AddNumber("1"))
             }
             btnNumber2.setOnClickListener {
-                addNumber("2")
+                passCodeViewModel.onEvent(PassCodeEvent.AddNumber("2"))
             }
             btnNumber3.setOnClickListener {
-                addNumber("3")
+                passCodeViewModel.onEvent(PassCodeEvent.AddNumber("3"))
             }
             btnNumber4.setOnClickListener {
-                addNumber("4")
+                passCodeViewModel.onEvent(PassCodeEvent.AddNumber("4"))
             }
             btnNumber5.setOnClickListener {
-                addNumber("5")
+                passCodeViewModel.onEvent(PassCodeEvent.AddNumber("5"))
             }
             btnNumber6.setOnClickListener {
-                addNumber("6")
+                passCodeViewModel.onEvent(PassCodeEvent.AddNumber("6"))
             }
             btnNumber7.setOnClickListener {
-                addNumber("7")
+                passCodeViewModel.onEvent(PassCodeEvent.AddNumber("7"))
             }
             btnNumber8.setOnClickListener {
-                addNumber("8")
+                passCodeViewModel.onEvent(PassCodeEvent.AddNumber("8"))
             }
             btnNumber9.setOnClickListener {
-                addNumber("9")
+                passCodeViewModel.onEvent(PassCodeEvent.AddNumber("9"))
             }
 
+        }
+    }
+
+    private fun handlePassCodeResource(resource: PassCodeResource) {
+        when(resource) {
+            is PassCodeResource.ChangeInput -> {
+                if(passCodeViewModel.inputStateFlow.value.input.isNotEmpty()){
+                    passCodeDots[passCodeViewModel.inputStateFlow.value.input.length - 1].setBackgroundResource(R.drawable.costume_colored_dot)
+                    passCodeDots.forEach { it.setBackgroundResource(R.drawable.costume_starting_dot) }
+                    for (i in 0..<resource.text.length) {
+                        d("browhatthefuck", i.toString())
+                        passCodeDots[i].setBackgroundResource(R.drawable.costume_colored_dot)
+                    }
+                }
+            }
+            is PassCodeResource.Success -> {
+                Toast.makeText(requireContext(), "Congrats", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(PassCodeFragmentDirections.actionPassCodeFragmentToLoginFragment())
+            }
+            is PassCodeResource.Failure -> {
+                Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()
+                resetInputDots()
+            }
+            is PassCodeResource.Empty -> {}
         }
     }
 
     private fun numberDeleteListener() {
         binding.btnBackspace.setOnClickListener {
-            if (inputPasscode.isNotEmpty()) {
-                inputPasscode.deleteCharAt(inputPasscode.length - 1)
-                updateInputDots()
-            }
-        }
-    }
-
-    private fun updateInputDots() {
-        passCodeDots.forEach { it.setBackgroundResource(R.drawable.costume_starting_dot) }
-        for (i in inputPasscode.indices) {
-            passCodeDots[i].setBackgroundResource(R.drawable.costume_colored_dot)
-        }
-    }
-
-    private fun addNumber(number: String) {
-        if (inputPasscode.length < 3) {
-            inputPasscode.append(number)
-            passCodeDots[inputPasscode.length - 1].setBackgroundResource(R.drawable.costume_colored_dot)
-        } else if (inputPasscode.length == 3) {
-            inputPasscode.append(number)
-            checkPasscode()
-        }
-    }
-
-    private fun checkPasscode() {
-        if (inputPasscode.toString() == "0934") {
-            resetInputDots()
-            Toast.makeText(requireContext(), "Congrats", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(PassCodeFragmentDirections.actionPassCodeFragmentToLoginFragment())
-        } else {
-            Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()
-            resetInputDots()
+            passCodeViewModel.onEvent(PassCodeEvent.RemoveNumber)
         }
     }
 

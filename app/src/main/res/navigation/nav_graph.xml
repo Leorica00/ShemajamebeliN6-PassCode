@@ -10,7 +10,9 @@
         android:label="PassCodeFragment" >
         <action
             android:id="@+id/action_passCodeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/passCodeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
