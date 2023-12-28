@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/eclipse_background"
     android:layout_height="match_parent"
     tools:context=".presentation.passcode.PassCodeFragment">
 
@@ -11,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Security Screen"
+        android:text="@string/security_screen"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -24,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Enter your passcode"
+        android:text="@string/enter_your_passcode"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +56,7 @@
         android:id="@+id/view_code_1"
         android:layout_width="12dp"
         android:layout_height="12dp"
-        android:layout_marginStart="68dp"
+        android:layout_marginStart="93dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/costume_starting_dot"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,169 +67,29 @@
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="93dp"
         android:background="@drawable/costume_starting_dot"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view_code_3"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_number_1"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="32dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_pass_code"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="48dp"
-        android:background="@drawable/costume_code_input_background"
-        android:text="1"
-        app:layout_constraintEnd_toStartOf="@id/btn_number_2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_code_1" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_number_4"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/costume_code_input_background"
-        android:text="4"
-        app:layout_constraintEnd_toStartOf="@id/btn_number_2"
-        app:layout_constraintHorizontal_bias="0.442"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_number_1" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_number_7"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/costume_code_input_background"
-        android:text="7"
-        app:layout_constraintEnd_toStartOf="@id/btn_number_2"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_number_4" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/btn_finger_print"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/costume_code_input_background"
-        android:src="@drawable/ic_fingerprint"
-        app:layout_constraintEnd_toStartOf="@id/btn_number_2"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_number_7" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_number_2"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/costume_code_input_background"
-        android:text="2"
-        app:layout_constraintEnd_toStartOf="@id/btn_number_3"
-        app:layout_constraintStart_toEndOf="@+id/btn_number_1"
-        app:layout_constraintTop_toBottomOf="@+id/view_code_1" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_number_5"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/costume_code_input_background"
-        android:text="5"
-        app:layout_constraintEnd_toStartOf="@+id/btn_number_6"
-        app:layout_constraintStart_toEndOf="@+id/btn_number_4"
-        app:layout_constraintTop_toBottomOf="@+id/btn_number_2" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_number_8"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/costume_code_input_background"
-        android:text="8"
-        app:layout_constraintEnd_toStartOf="@+id/btn_number_9"
-        app:layout_constraintHorizontal_bias="0.451"
-        app:layout_constraintStart_toEndOf="@+id/btn_number_7"
-        app:layout_constraintTop_toBottomOf="@+id/btn_number_5" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_number_0"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/costume_code_input_background"
-        android:text="0"
-        app:layout_constraintEnd_toStartOf="@+id/btn_number_9"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toEndOf="@+id/btn_number_7"
-        app:layout_constraintTop_toBottomOf="@+id/btn_number_8" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_number_3"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/costume_code_input_background"
-        android:text="3"
+        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toEndOf="@+id/btn_number_2"
-        app:layout_constraintTop_toBottomOf="@+id/view_code_1" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_number_6"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/costume_code_input_background"
-        android:text="6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toEndOf="@+id/btn_number_2"
-        app:layout_constraintTop_toBottomOf="@+id/btn_number_3" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_number_9"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/costume_code_input_background"
-        android:text="9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.442"
-        app:layout_constraintStart_toEndOf="@+id/btn_number_2"
-        app:layout_constraintTop_toBottomOf="@+id/btn_number_6" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/btn_backspace"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/costume_code_input_background"
-        android:src="@drawable/ic_backspace"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.442"
-        app:layout_constraintStart_toEndOf="@+id/btn_number_2"
-        app:layout_constraintTop_toBottomOf="@+id/btn_number_9" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_code_2" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/forgot_password"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="32dp"
+        android:text="@string/forgot_password"
         android:textColor="#8E8E93"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
